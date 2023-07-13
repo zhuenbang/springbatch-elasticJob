@@ -1,0 +1,22 @@
+server:
+  port: 8101
+elasticjob:
+  regCenter:
+    serverLists: localhost:2181
+    namespace: jobdemo
+  jobs:
+    migrateUserJob:
+      elasticJobClass: com.example.job.jobs.MigrateUserJob
+      cron: 0 0/2 * * * ?
+      shardingTotalCount: 2
+      shardingItemParameters: 0=0@5,1=5@20
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/batch_job?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.jdbc.Driver
+
+  batch:
+    job:
+      enabled: false
